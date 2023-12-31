@@ -1,6 +1,7 @@
 import { Button } from "@nextui-org/react";
 import * as actions from "@/actions";
 import { auth } from "@/auth";
+import Profile from "@/components/Profile";
 
 type AuthButtonProps = {
   action: () => Promise<void>;
@@ -28,6 +29,7 @@ export default async function HomePage() {
       ) : (
         <div>You are signed out</div>
       )}
+      <Profile />
     </main>
   );
 }
