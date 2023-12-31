@@ -24,8 +24,8 @@ export const {
     })
   ],
   callbacks: {
-    // Bug for next-auth
     async session({ session, user }: any) {
+      // Ensure session user id gets populated when session is checked
       if (session && user) session.user.id = user.id;
 
       return session;
