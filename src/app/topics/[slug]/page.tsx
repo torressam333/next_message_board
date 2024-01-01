@@ -1,7 +1,7 @@
 type Props = {};
 
-const page = (props: Props) => {
-  return <div>page</div>;
+const TopicShowPage = (props: Props) => {
+  return <div>Topics show page</div>;
 };
 
-export default page;
+export default TopicShowPage;

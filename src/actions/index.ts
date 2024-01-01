@@ -1,16 +1,8 @@
-"use server";
-import * as auth from "@/auth";
-
 /**
- * File meant to house needed server actions for authentication
- * via GitHub as the provider
+ * Simplify and centralize server action exports
  */
-export async function signIn() {
-  return auth.signIn("github");
-}
-
-export async function signOut() {
-  return auth.signOut({
-    redirectTo: "/"
-  });
-}
+export { signIn } from "./signIn";
+export { signOut } from "./signOut";
+export { createComment } from "./createComment";
+export { createPost } from "./createPost";
+export { createTopic } from "./createTopic";

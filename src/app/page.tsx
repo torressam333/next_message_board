@@ -25,7 +25,7 @@ export default async function HomePage() {
       <AuthButton action={actions.signOut} buttonText="Sign Out" />
 
       {session?.user ? (
-        <div>{JSON.stringify(session.user)}</div>
+        <div>You are signed in</div>
       ) : (
         <div>You are signed out</div>
       )}
