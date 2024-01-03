@@ -14,6 +14,9 @@ import * as actions from "@/actions";
 const HeaderAuth = () => {
   const session = useSession();
 
+  // Handle session loading to prevent showing sign in/up buttons
+  if (session?.status === "loading") return "authenticating...";
+
   return session?.data?.user ? (
     <Popover placement="left">
       <PopoverTrigger>
