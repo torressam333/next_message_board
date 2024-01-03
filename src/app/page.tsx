@@ -1,9 +1,7 @@
-import Profile from "@/components/Profile";
-
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <>
-      <Profile />
+      <div>Home page</div>
     </>
   );
 }

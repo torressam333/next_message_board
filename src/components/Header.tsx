@@ -4,22 +4,16 @@ import {
   NavbarBrand,
   NavbarItem,
   Input,
-  Avatar,
   NavbarContent
 } from "@nextui-org/react";
-import { auth } from "@/auth";
-import AuthButton from "./AuthButton";
-import * as actions from "@/actions";
+import HeaderAuth from "./HeaderAuth";
 
 const Header = async () => {
-  // Grab session
-  const session = await auth();
-
   return (
     <Navbar className="shadow mb-6">
       <NavbarBrand>
         <Link href="/" className="font-bold">
-          GEEK OUT
+          Geek Out Inc
         </Link>
       </NavbarBrand>
       <NavbarContent justify="center">
@@ -28,13 +22,7 @@ const Header = async () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
-          {session?.user ? (
-            <Avatar src={session.user.image?.toString()} />
-          ) : (
-            <AuthButton action={actions.signIn} buttonText="Sign In" />
-          )}
-        </NavbarItem>
+        <HeaderAuth />
       </NavbarContent>
     </Navbar>
   );
