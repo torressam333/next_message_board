@@ -1,5 +1,6 @@
 "use server";
 import { z } from "zod";
+import { auth } from "@/auth";
 
 // Create zod schema to compare against
 const createTopicSchema = z.object({
@@ -16,6 +17,7 @@ interface CreateTopicFormState {
   errors: {
     name?: string[];
     description?: string[];
+    _form?: string[];
   };
 }
 
@@ -32,6 +34,15 @@ export async function createTopic(
   if (!result.success) {
     return {
       errors: result.error.flatten().fieldErrors
+    };
+  }
+
+  const session = await auth();
+  if (!session || !session?.user) {
+    return {
+      errors: {
+        _form: ["You must first sign in to create a topic"]
+      }
     };
   }
 

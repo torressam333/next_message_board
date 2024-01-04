@@ -10,17 +10,25 @@ import {
 } from "@nextui-org/react";
 import * as actions from "@/actions";
 import { useFormState } from "react-dom";
+import { useSession } from "next-auth/react";
 
 const TopicCreateForm = () => {
   const [formState, formAction] = useFormState(actions.createTopic, {
     errors: {}
   });
 
+  const session = useSession();
+  const isAuthenticated = !!session?.data?.user;
+
   return (
     <>
       <Popover placement="left">
         <PopoverTrigger>
-          <Button color="primary">Create Topic</Button>
+          {isAuthenticated ? (
+            <Button color="primary">Create Topic</Button>
+          ) : (
+            <p>Trending Topics</p>
+          )}
         </PopoverTrigger>
         <PopoverContent>
           <form action={formAction}>
