@@ -37,15 +37,6 @@ export async function createTopic(
     };
   }
 
-  const session = await auth();
-  if (!session || !session?.user) {
-    return {
-      errors: {
-        _form: ["You must first sign in to create a topic"]
-      }
-    };
-  }
-
   // TODO: revalidate homepage cache
 
   // No errors? Return empty errors object to maintain
