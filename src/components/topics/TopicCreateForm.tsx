@@ -31,12 +31,19 @@ const TopicCreateForm = () => {
                 label="Name"
                 labelPlacement="outside"
                 name="name"
+                errorMessage={formState?.errors?.name?.join(", ")}
+                variant="bordered"
+                isInvalid={!!formState.errors.name}
               />
+
               <Textarea
                 placeholder=" Describe topic..."
                 label="Description"
                 labelPlacement="outside"
                 name="description"
+                errorMessage={formState?.errors?.description?.join(", ")}
+                variant="bordered"
+                isInvalid={!!formState.errors.description}
               />
               <Button type="submit">Submit</Button>
             </div>
