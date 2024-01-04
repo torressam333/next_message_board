@@ -8,7 +8,6 @@ import {
   PopoverTrigger,
   PopoverContent
 } from "@nextui-org/react";
-import { auth } from "@/auth";
 import * as actions from "@/actions";
 
 const HeaderAuth = () => {

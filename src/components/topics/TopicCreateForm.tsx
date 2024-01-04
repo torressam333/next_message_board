@@ -19,11 +19,17 @@ const TopicCreateForm = () => {
           <form action={actions.createTopic}>
             <div className="flex flex-col flex-wrap md:flex-nowrap gap-4 p-4 w-80">
               <h3 className="text-lg">Create a Topic</h3>
-              <Input placeholder="Name" label="Name" labelPlacement="outside" />
+              <Input
+                placeholder="Name"
+                label="Name"
+                labelPlacement="outside"
+                name="name"
+              />
               <Textarea
                 placeholder=" Describe topic..."
                 label="Description"
                 labelPlacement="outside"
+                name="description"
               />
               <Button type="submit">Submit</Button>
             </div>
