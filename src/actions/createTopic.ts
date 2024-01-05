@@ -1,6 +1,10 @@
 "use server";
 import { z } from "zod";
-import { auth } from "@/auth";
+import { type Topic } from "@prisma/client";
+import { prisma } from "@/db";
+import { redirect } from "next/navigation";
+import paths from "@/paths";
+import { revalidatePath } from "next/cache";
 
 // Create zod schema to compare against
 const createTopicSchema = z.object({
@@ -37,11 +41,34 @@ export async function createTopic(
     };
   }
 
-  // TODO: revalidate homepage cache
+  let topic: Topic;
 
-  // No errors? Return empty errors object to maintain
-  // exprected TS return type shape
-  return {
-    errors: {}
-  };
+  try {
+    // Insert topic into DB via prisma orm
+    topic = await prisma.topic.create({
+      data: {
+        slug: result.data.name,
+        description: result.data.description
+      }
+    });
+  } catch (err: unknown) {
+    // Make error available to the client via _form property
+    return err instanceof Error
+      ? {
+          errors: {
+            _form: [err.message] // Prisma/Db specific error
+          }
+        }
+      : {
+          errors: {
+            _form: ["An unexpected error has occurred"]
+          }
+        };
+  }
+
+  // Ensure user sees new topic
+  revalidatePath(paths.home());
+
+  // Send user to topic show page
+  redirect(paths.topicShow(topic.slug));
 }

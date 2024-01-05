@@ -24,7 +24,11 @@ const TopicCreateForm = () => {
     <>
       <Popover placement="left">
         <PopoverTrigger>
-          {isAuthenticated && <Button color="primary">Create Topic</Button>}
+          {isAuthenticated ? (
+            <Button color="primary">Create Topic</Button>
+          ) : (
+            <p>Sign in to create topics</p>
+          )}
         </PopoverTrigger>
         <PopoverContent>
           <form action={formAction}>
@@ -49,6 +53,11 @@ const TopicCreateForm = () => {
                 variant="bordered"
                 isInvalid={!!formState.errors.description}
               />
+              {formState.errors._form && (
+                <div className="border border-red-500 bg-red-200 p-3 rounded">
+                  <p>{formState.errors._form}</p>
+                </div>
+              )}
               <Button type="submit">Submit</Button>
             </div>
           </form>
