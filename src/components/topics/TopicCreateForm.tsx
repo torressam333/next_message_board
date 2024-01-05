@@ -24,11 +24,7 @@ const TopicCreateForm = () => {
     <>
       <Popover placement="left">
         <PopoverTrigger>
-          {isAuthenticated ? (
-            <Button color="primary">Create Topic</Button>
-          ) : (
-            <p>Trending Topics</p>
-          )}
+          {isAuthenticated && <Button color="primary">Create Topic</Button>}
         </PopoverTrigger>
         <PopoverContent>
           <form action={formAction}>
