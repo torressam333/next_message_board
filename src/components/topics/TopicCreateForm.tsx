@@ -58,7 +58,7 @@ const TopicCreateForm = () => {
                   <p>{formState.errors._form}</p>
                 </div>
               )}
-              <FormButton />
+              <FormButton>Submit</FormButton>
             </div>
           </form>
         </PopoverContent>

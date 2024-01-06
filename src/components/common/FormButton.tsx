@@ -3,12 +3,16 @@
 import { useFormStatus } from "react-dom";
 import { Button } from "@nextui-org/react";
 
-const FormButton = () => {
+interface FormButtonProps {
+  children: React.ReactNode;
+}
+
+const FormButton = ({ children }: FormButtonProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" aria-disabled={pending}>
-      Add
+    <Button type="submit" aria-disabled={pending} isLoading={pending}>
+      {children}
     </Button>
   );
 };
