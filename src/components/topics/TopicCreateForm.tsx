@@ -11,12 +11,12 @@ import {
 import * as actions from "@/actions";
 import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
+import FormButton from "../common/FormButton";
 
 const TopicCreateForm = () => {
   const [formState, formAction] = useFormState(actions.createTopic, {
     errors: {}
   });
-
   const session = useSession();
   const isAuthenticated = !!session?.data?.user;
 
@@ -58,7 +58,7 @@ const TopicCreateForm = () => {
                   <p>{formState.errors._form}</p>
                 </div>
               )}
-              <Button type="submit">Submit</Button>
+              <FormButton />
             </div>
           </form>
         </PopoverContent>
