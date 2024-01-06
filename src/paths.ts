@@ -13,7 +13,7 @@ const paths = {
     return `/topics/${topicSlug}/posts/new`;
   },
   postShow(topicSlug: string, postId: string) {
-    `/topics/${topicSlug}/posts/${postId}`;
+    return `/topics/${topicSlug}/posts/${postId}`;
   }
 };
 
