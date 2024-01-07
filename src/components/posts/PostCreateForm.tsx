@@ -11,7 +11,7 @@ import {
 import * as actions from "@/actions";
 import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
-import FormButton from "../common/FormButton";
+import FormButton from "@/components/common/FormButton";
 
 const PostCreateForm = () => {
   const [formState, formAction] = useFormState(actions.createPost, {
@@ -19,15 +19,12 @@ const PostCreateForm = () => {
   });
   const session = useSession();
   const isAuthenticated = !!session?.data?.user;
+
   return (
     <>
       <Popover placement="left">
         <PopoverTrigger>
-          {isAuthenticated ? (
-            <Button color="primary">Create Post</Button>
-          ) : (
-            <p>Sign in to create posts</p>
-          )}
+          {isAuthenticated ? <Button color="primary">Create Post</Button> : ""}
         </PopoverTrigger>
         <PopoverContent>
           <form action={formAction}>
@@ -57,7 +54,7 @@ const PostCreateForm = () => {
                   <p>{formState.errors._form}</p>
                 </div>
               )}
-              <FormButton>Submit</FormButton>
+              <FormButton>Create Post</FormButton>
             </div>
           </form>
         </PopoverContent>
