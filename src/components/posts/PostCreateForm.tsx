@@ -13,10 +13,17 @@ import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
 import FormButton from "@/components/common/FormButton";
 
-const PostCreateForm = () => {
-  const [formState, formAction] = useFormState(actions.createPost, {
-    errors: {}
-  });
+interface PostCreateProps {
+  slug: string;
+}
+
+const PostCreateForm = ({ slug }: PostCreateProps) => {
+  const [formState, formAction] = useFormState(
+    actions.createPost.bind(null, slug),
+    {
+      errors: {}
+    }
+  );
   const session = useSession();
   const isAuthenticated = !!session?.data?.user;
 

@@ -1,6 +1,6 @@
 "use server";
 import { z } from "zod";
-import { type Post } from "@prisma/client";
+import { type Post, type Topic } from "@prisma/client";
 import { prisma } from "@/db";
 import { redirect } from "next/navigation";
 import paths from "@/paths";
@@ -22,6 +22,7 @@ interface CreatePostFormState {
 }
 
 export async function createPost(
+  slug: string,
   formState: CreatePostFormState,
   formData: FormData
 ): Promise<CreatePostFormState> {
@@ -36,17 +37,28 @@ export async function createPost(
       errors: result.error.flatten().fieldErrors
     };
 
-  let post: Post;
   const session = await auth();
+  const topic = await getTopic(slug);
 
+  if (!session || !session.user)
+    return { errors: { _form: ["You must be signed in to do this"] } };
+
+  if (!topic || "error" in topic)
+    return {
+      errors: {
+        _form: ["Cannot find related topic"]
+      }
+    };
+
+  let post: Post;
   try {
     // Insert post into DB via prisma orm
     post = await prisma.post.create({
       data: {
         title: result.data.title,
         content: result.data.content,
-        userId: session?.user?.id,
-        topicId: "clr27ky8p0000kggj31szbyu0"
+        userId: session.user.id,
+        topicId: topic.id
       }
     });
   } catch (err: unknown) {
@@ -65,8 +77,26 @@ export async function createPost(
   }
 
   // Ensure user sees new topic
-  revalidatePath(paths.home());
+  revalidatePath(paths.topicShow(slug));
 
   // Send user to topic show page
   redirect(paths.postShow(post.title, post.id));
 }
+
+/**
+ *
+ * @param slug
+ * @returns
+ */
+const getTopic = async (slug: string) => {
+  let topic;
+  try {
+    topic = await prisma.topic.findFirst({
+      where: { slug }
+    });
+  } catch (error) {
+    return { error };
+  }
+
+  return topic;
+};
