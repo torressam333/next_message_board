@@ -11,7 +11,7 @@ const TopicList = async (props: TopicListProps) => {
 
   const renderedTopics = topics.map((topic) => (
     <div key={topic.id}>
-      <Link href={paths.postShow(topic.slug, topic.id)}>
+      <Link href={paths.topicShow(topic.slug)}>
         <Chip color="warning" variant="shadow">
           {topic.slug}
         </Chip>
