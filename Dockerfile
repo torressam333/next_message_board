@@ -35,7 +35,7 @@ RUN chown -R app:app .
 USER app
 
 # init prisma
-RUN npx prisma generate
+RUN npx prisma generate --schema=./prisma/schema.prisma
 
 # install dependencies
 RUN npm install
