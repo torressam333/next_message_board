@@ -18,6 +18,7 @@ interface PostCreateProps {
 }
 
 const PostCreateForm = ({ slug }: PostCreateProps) => {
+  // Bind slug so it's available in createPost server action
   const [formState, formAction] = useFormState(
     actions.createPost.bind(null, slug),
     {

@@ -80,7 +80,7 @@ export async function createPost(
   revalidatePath(paths.topicShow(slug));
 
   // Send user to topic show page
-  redirect(paths.postShow(post.title, post.id));
+  redirect(paths.postShow(slug, post.id));
 }
 
 /**

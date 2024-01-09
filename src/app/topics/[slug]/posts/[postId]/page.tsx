@@ -1,6 +1,6 @@
 import Link from "next/link";
-import PostShow from "@/components/posts/PostShow";
-import CommentList from "@/components/comments/CommentList";
+//import PostShow from "@/components/posts/PostShow";
+//import CommentList from "@/components/comments/CommentList";
 import CommentCreateForm from "@/components/comments/CommentCreateForm";
 import paths from "@/paths";
 
