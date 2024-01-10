@@ -1,5 +1,6 @@
 import { prisma } from "..";
 import { type Comment } from "@prisma/client";
+import { cache } from "react";
 
 export type CommentWithAuthor = Comment & {
   user: { name: string | null; image: string | null };
@@ -10,13 +11,14 @@ export type CommentWithAuthor = Comment & {
  * @param postId
  * @returns
  */
-export function fetchCommentsByPostId(
-  postId: string
-): Promise<CommentWithAuthor[]> {
-  return prisma.comment.findMany({
-    where: { postId },
-    include: {
-      user: { select: { name: true, image: true } }
-    }
-  });
-}
+export const fetchCommentsByPostId = cache(
+  (postId: string): Promise<CommentWithAuthor[]> => {
+    console.log("QUERYING COMMENTS TABLE RECURSIVELY");
+    return prisma.comment.findMany({
+      where: { postId },
+      include: {
+        user: { select: { name: true, image: true } }
+      }
+    });
+  }
+);
