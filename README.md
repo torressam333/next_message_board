@@ -16,21 +16,38 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running the application with Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Prerequisites:
 
-## Learn More
+Ensure you have Docker and Docker Compose installed on your system.
 
-To learn more about Next.js, take a look at the following resources:
+Steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Pull the image from Docker Hub:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ```
+    docker pull torrressam/react-message-board:latest
+  ```
 
-## Deploy on Vercel
+- Start the application with Docker Compose:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  ```
+    docker-compose up -d
+  ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Issues with writting to the sqlite db make sure you rebuild the image with no cache and then run
+
+  ```
+    docker-compose build --no-cache
+    docker compose up
+  ```
+
+- Accessing the application:
+
+The application should be accessible at http://localhost:3000 (or the specified port mapping in your docker-compose.yml file).
+
+- Additional notes:
+
+If you encounter issues, check the logs of the containers using docker-compose logs.
+For more information about Docker Compose, refer to the official documentation: [(https://docs.docker.com/compose/)]
