@@ -13,7 +13,6 @@ export type CommentWithAuthor = Comment & {
  */
 export const fetchCommentsByPostId = cache(
   (postId: string): Promise<CommentWithAuthor[]> => {
-    console.log("QUERYING COMMENTS TABLE RECURSIVELY");
     return prisma.comment.findMany({
       where: { postId },
       include: {
