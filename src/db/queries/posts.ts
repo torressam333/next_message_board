@@ -7,6 +7,11 @@ export type PostWithData = Post & {
   _count: { comments: number };
 };
 
+// Another way to declare above type
+// export type PostWithData = Awaited<
+//   ReturnType<typeof fetchPostsByTopicSlug>
+// >[number];
+
 /**
  *
  * @param slug
