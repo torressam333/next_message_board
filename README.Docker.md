@@ -1,22 +1,35 @@
-### Building and running your application
+## Running the application with Docker
 
-When you're ready, start your application by running:
-`docker compose up --build`.
+### Prerequisites:
 
-Your application will be available at http://localhost:3000.
+Ensure you have Docker and Docker Compose installed on your system.
 
-### Deploying your application to the cloud
+Steps:
 
-First, build your image, e.g.: `docker build -t myapp .`.
-If your cloud uses a different CPU architecture than your development
-machine (e.g., you are on a Mac M1 and your cloud provider is amd64),
-you'll want to build the image for that platform, e.g.:
-`docker build --platform=linux/amd64 -t myapp .`.
+- Pull the image from Docker Hub:
 
-Then, push it to your registry, e.g. `docker push myregistry.com/myapp`.
+  ```
+    docker pull torrressam/react-message-board:latest
+  ```
 
-Consult Docker's [getting started](https://docs.docker.com/go/get-started-sharing/)
-docs for more detail on building and pushing.
+- Start the application with Docker Compose:
 
-### References
-* [Docker's Node.js guide](https://docs.docker.com/language/nodejs/)
+  ```
+    docker-compose up -d
+  ```
+
+- Issues with writting to the sqlite db make sure you rebuild the image with no cache and then run
+
+  ```
+    docker-compose build --no-cache
+    docker compose up
+  ```
+
+- Accessing the application:
+
+The application should be accessible at http://localhost:3000 (or the specified port mapping in your docker-compose.yml file).
+
+- Additional notes:
+
+If you encounter issues, check the logs of the containers using docker-compose logs.
+For more information about Docker Compose, refer to the official documentation: [(https://docs.docker.com/compose/)]
