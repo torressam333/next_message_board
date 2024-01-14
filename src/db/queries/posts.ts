@@ -29,3 +29,28 @@ export function fetchPostsByTopicSlug(slug: string): Promise<PostWithData[]> {
     }
   });
 }
+
+/**
+ *
+ * @param slug
+ * @returns
+ */
+export function fetchTopPosts(): Promise<PostWithData[]> {
+  return prisma.post.findMany({
+    orderBy: [
+      {
+        comments: {
+          _count: "desc"
+        }
+      }
+    ],
+    include: {
+      topic: { select: { slug: true } },
+      user: { select: { name: true } },
+      _count: {
+        select: { comments: true }
+      }
+    },
+    take: 5
+  });
+}
