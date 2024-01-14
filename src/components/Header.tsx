@@ -3,10 +3,10 @@ import {
   Navbar,
   NavbarBrand,
   NavbarItem,
-  Input,
   NavbarContent
 } from "@nextui-org/react";
 import HeaderAuth from "./HeaderAuth";
+import SearchInput from "./SearchInput";
 
 const Header = async () => {
   return (
@@ -18,7 +18,7 @@ const Header = async () => {
       </NavbarBrand>
       <NavbarContent justify="center">
         <NavbarItem>
-          <Input />
+          <SearchInput />
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
